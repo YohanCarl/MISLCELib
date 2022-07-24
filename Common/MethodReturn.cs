@@ -8,6 +8,9 @@ namespace MISLCELib.Common
 {
     public class MethodReturn
     {
-
+        public string Message { get; set; }
+        public bool IsSuccess { get; set; }
+        public bool HasException { get; set; }
+        public Exception Exception { get; set; }
     }
 }
