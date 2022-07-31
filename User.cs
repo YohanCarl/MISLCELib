@@ -45,7 +45,7 @@ namespace MISLCELib
                 UserAccessType = ParseUserAccessType(row["accesstype"].ToString());
                 IsLocked = row["islocked"].ToString() == "1";
                 IsActive = row["isactive"].ToString() == "1";
-                IsDeleted = row["isdelted"].ToString() == "1";
+                IsDeleted = row["isdeleted"].ToString() == "1";
                 STEMPID = row["stempid"].ToString();
             }
             else
@@ -173,6 +173,12 @@ namespace MISLCELib
             }
             return mr;
         }
+
+        /// <summary>
+        /// Get User List by filter
+        /// </summary>
+        /// <param name="filter">filter to username</param>
+        /// <returns></returns>
         public List<User> GetUserList(string filter)
         {
             List<User> users = new List<User>();
@@ -181,24 +187,85 @@ namespace MISLCELib
             {
                 for (int i = 0; i < length; i++)
                 {
-
+                    IsEmpty = false;
+                    var row = dset.Tables[0].Rows[i];
+                    User user = new User();
+                    user.UID = row["uid"].ToString();
+                    user.Username = row["uname"].ToString();
+                    user.UserAccessType = ParseUserAccessType(row["accesstype"].ToString());
+                    user.IsLocked = row["islocked"].ToString() == "1";
+                    user.IsActive = row["isactive"].ToString() == "1";
+                    user.IsDeleted = row["isdeleted"].ToString() == "1";
+                    user.STEMPID = row["stempid"].ToString();
+                    users.Add(user);
                 }
-                IsEmpty = false;
-                var row = dset.Tables[0].Rows[0];
-                UID = row["uid"].ToString();
-                Username = row["uname"].ToString();
-                UPasswordRaw = upwd;
-                UPasswordEnc = row["upwd"].ToString();
-                UserAccessType = ParseUserAccessType(row["accesstype"].ToString());
-                IsLocked = row["islocked"].ToString() == "1";
-                IsActive = row["isactive"].ToString() == "1";
-                IsDeleted = row["isdelted"].ToString() == "1";
-                STEMPID = row["stempid"].ToString();
             }
             else
             {
                 IsEmpty = true;
             }
+            return users;
+        }
+        
+        /// <summary>
+        /// Edit User
+        /// </summary>
+        /// <returns></returns>
+        public MethodReturn EditUser()
+        {
+            MethodReturn mr = ValidateInput();
+            if (mr.IsSuccess)
+            {
+                // Check if User Exist
+                if (!UserExist(Username))
+                {
+                    mr.Message = "User Does not Exist!";
+                    mr.IsSuccess = false;
+                }
+                // Proceed Add
+                else
+                {
+                    mr.IsSuccess = dbcon.Exec("UPDATE tbl_users SET " +
+                        "accesstype='', " +
+                        "uname='' " +
+                        "WHERE uid='" + UID + "'");
+                    mr.Message = mr.IsSuccess ? "Successfully updated user info!" : "Something went wrong, please try again";
+                }
+            }
+            return mr;
+        }
+
+        public MethodReturn ChangePassword()
+        {
+            MethodReturn mr = ValidateInput();
+            return mr;
+        }
+
+        public MethodReturn LiftUser()
+        {
+            MethodReturn mr = ValidateInput();
+            return mr;
+        }
+        public MethodReturn DeleteUser()
+        {
+            MethodReturn mr = ValidateInput();
+            if (mr.IsSuccess)
+            {
+                if (UserExist(Username))
+                {
+                    mr.IsSuccess = dbcon.Exec("UPDATE tbl_users SET isdeleted=1 WHERE uid='" + UID + "'");
+                    mr.Message = mr.IsSuccess ? "Successfully archived User." : "Something went wrong pleas try again.";
+                }
+                else
+                {
+                    mr.Message = "User does not exist!";
+                }
+            }
+            else
+            {
+                mr.Message = "Invalid inputs!";
+            }
+            return mr;
         }
         #endregion
     }
