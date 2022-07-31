@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MISLCELib
 {
-    class Tecaher
+    public class Teacher
     {
     }
 }

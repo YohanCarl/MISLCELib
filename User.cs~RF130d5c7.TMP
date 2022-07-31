@@ -123,10 +123,7 @@ namespace MISLCELib
         {
             return dbcon.GetDataset("SELECT * FROM tbl_users where uname='" + uname + "'").Tables[0].Rows > 0;
         }
-        /// <summary>
-        /// Validate Inputs
-        /// </summary>
-        /// <returns></returns>
+
         private MethodReturn ValidateInput()
         {
             MethodReturn mr = new MethodReturn();
@@ -241,30 +238,12 @@ namespace MISLCELib
         public MethodReturn ChangePassword()
         {
             MethodReturn mr = ValidateInput();
-
             return mr;
         }
 
         public MethodReturn LiftUser()
         {
             MethodReturn mr = ValidateInput();
-            if (mr.IsSuccess)
-            {
-                if (UserExist(Username))
-                {
-                    mr.IsSuccess = dbcon.Exec("UPDATE tbl_users set islocked='0' WHERE uid='" + UID + "'");
-                    mr.Message = mr.IsSuccess ? "Successfully lifted user [ " + Username + " ]!" : "Something went wrong please, try again!";
-                }
-                else
-                {
-                    mr.IsSuccess = false;
-                    mr.Message = "Username does not exist!";
-                }
-            }
-            else
-            {
-                mr.Message = "Invalid Inputs!";
-            }
             return mr;
         }
         public MethodReturn DeleteUser()
@@ -280,7 +259,6 @@ namespace MISLCELib
                 else
                 {
                     mr.Message = "User does not exist!";
-                    mr.IsSuccess = false;
                 }
             }
             else
