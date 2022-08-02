@@ -236,6 +236,7 @@ namespace MISLCELib
         public MethodReturn ValidateInput()
         {
             MethodReturn mr = new MethodReturn();
+            mr.IsSuccess = true;
             if (TeacherName.Fname == "")
             {
                 mr.IsSuccess = false;
