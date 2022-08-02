@@ -70,6 +70,7 @@ namespace MISLCELib
                 ContactNo = row["contactinfo"].ToString();
                 IsActive = row["isactive"].ToString() == "1";
                 IsDeleted = row["isdeleted"].ToString() == "1";
+                Section = GetStudentCurrentSection(StudentID);
                 IsEmpty = false;
             }
             else
@@ -115,6 +116,7 @@ namespace MISLCELib
                     student.IsActive = row["isactive"].ToString() == "1";
                     student.IsDeleted = row["isdeleted"].ToString() == "1";
                     student.IsEmpty = false;
+                    student.Section = GetStudentCurrentSection(student.StudentID);
                     students.Add(student);
                 }
             }
@@ -223,6 +225,17 @@ namespace MISLCELib
             }
             return mr;
         }
+        public Section GetStudentCurrentSection(string studentID)
+        {
+            Section section = new Section();
+            DataSet dset = dbcon.GetDataset("SELECT * FROM tbl_student_history WHERE studentID='" + studentID + "'");
+            if (dset.Tables[0].Rows.Count > 0)
+            {
+                var row = dset.Tables[0].Rows[0];
+                section = new Section(row["sectionID"].ToString());
+            }
+            return section;
+        }
         #endregion
         #region Private Methods
         /// <summary>
@@ -280,6 +293,7 @@ namespace MISLCELib
             }
             return mr;
         }
+        
         #endregion
     }
 }
