@@ -121,7 +121,7 @@ namespace MISLCELib
         /// <returns></returns>
         private bool UserExist(string uname)
         {
-            return dbcon.GetDataset("SELECT * FROM tbl_users where uname='" + uname + "'").Tables[0].Rows > 0;
+            return dbcon.GetDataset("SELECT * FROM tbl_users where uname='" + uname + "'").Tables[0].Rows.Count > 0;
         }
         /// <summary>
         /// Validate Inputs
@@ -185,10 +185,10 @@ namespace MISLCELib
         public List<User> GetUserList(string filter)
         {
             List<User> users = new List<User>();
-            DataSet dset = dbcon.GetDataset("SELECT * FROM tbl_users where uname='" + uname + "'");
+            DataSet dset = dbcon.GetDataset("SELECT * FROM tbl_users where uname='" + Username + "'");
             if (dset.Tables[0].Rows.Count > 0)
             {
-                for (int i = 0; i < length; i++)
+                for (int i = 0; i < dset.Tables[0].Rows.Count; i++)
                 {
                     IsEmpty = false;
                     var row = dset.Tables[0].Rows[i];

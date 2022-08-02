@@ -100,7 +100,7 @@
     <Compile Include="StudentGrade.cs" />
     <Compile Include="StudentHistory.cs" />
     <Compile Include="Subject.cs" />
-    <Compile Include="Tecaher.cs" />
+    <Compile Include="Teacher.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>

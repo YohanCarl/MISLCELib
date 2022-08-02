@@ -1,0 +1,2 @@
+F:\ClientProject\MISLCE\MISLCELib\obj\Debug\MISLCELib.csproj.AssemblyReference.cache
+F:\ClientProject\MISLCE\MISLCELib\obj\Debug\MISLCELib.csproj.CoreCompileInputs.cache
