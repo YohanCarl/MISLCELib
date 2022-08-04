@@ -31,3 +31,11 @@ F:\ClientProject\MISLCE\MISLCELib\obj\Debug\MISLCELib.pdb
 F:\ClientProject\MISLCE\MISLCE\bin\MISLCELib.dll.config
 F:\ClientProject\MISLCE\MISLCE\bin\MISLCELib.dll
 F:\ClientProject\MISLCE\MISLCE\bin\MISLCELib.pdb
+C:\Users\marwi\Documents\GitHub\MISLCE\bin\MISLCELib.dll.config
+C:\Users\marwi\Documents\GitHub\MISLCE\bin\MISLCELib.dll
+C:\Users\marwi\Documents\GitHub\MISLCE\bin\MISLCELib.pdb
+C:\Users\marwi\Documents\GitHub\MISLCELib\obj\Debug\MISLCELib.csproj.AssemblyReference.cache
+C:\Users\marwi\Documents\GitHub\MISLCELib\obj\Debug\MISLCELib.csproj.CoreCompileInputs.cache
+C:\Users\marwi\Documents\GitHub\MISLCELib\obj\Debug\MISLCELib.csproj.CopyComplete
+C:\Users\marwi\Documents\GitHub\MISLCELib\obj\Debug\MISLCELib.dll
+C:\Users\marwi\Documents\GitHub\MISLCELib\obj\Debug\MISLCELib.pdb
