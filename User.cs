@@ -73,7 +73,7 @@ namespace MISLCELib
                 var row = dset.Tables[0].Rows[0];
                 UID = row["uid"].ToString();
                 Username = row["uname"].ToString();
-                UPasswordRaw = upwd;
+                UPasswordRaw = UPasswordRaw;
                 UPasswordEnc = row["upwd"].ToString();
                 UserAccessType = ParseUserAccessType(row["accesstype"].ToString());
                 IsLocked = row["islocked"].ToString() == "1";
