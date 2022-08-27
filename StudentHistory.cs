@@ -53,6 +53,11 @@ namespace MISLCELib
         }
         #endregion
         #region Public Method
+        /// <summary>
+        /// Get Studnet's history
+        /// </summary>
+        /// <param name="studentID"></param>
+        /// <returns></returns>
         public List<StudentHistory> GetStudentHistories(string studentID)
         {
             List<StudentHistory> studentHistories = new List<StudentHistory>();
@@ -75,6 +80,10 @@ namespace MISLCELib
             }
             return studentHistories;
         }
+        /// <summary>
+        /// Add Student history
+        /// </summary>
+        /// <returns></returns>
         public MethodReturn AddStudentHistory()
         {
             MethodReturn mr = new MethodReturn();
@@ -88,6 +97,33 @@ namespace MISLCELib
                     "'" + SectionID + "', " +    //Section ID
                     "'" + GradeLevel + "')");      //Grade Level
                 mr.Message = mr.IsSuccess ? "Successfully recorded student record" : "Something went wrong please try again";
+            }
+            return mr;
+        }
+        /// <summary>
+        /// Edit Student history
+        /// </summary>
+        /// <returns></returns>
+        public MethodReturn EditStudentHistory()
+        {
+            MethodReturn mr = new MethodReturn();
+            mr = ValidateInput();
+            if (mr.IsSuccess)
+            {
+                if (StudentHistoryExist(Sthid))
+                {
+                    mr.IsSuccess = dbcon.Exec("UPDATE tbl_student_history SET " +
+                        "schoolyear='" + SchoolYear + "', " +
+                        "sectionID='" + SectionID + "', " +
+                        "gradelevel='" + GradeLevel + "' " +
+                        "WHERE sthid='" + Sthid + "'");
+                    mr.Message = mr.IsSuccess ? "Successfully update studendt record!" : "Something went wrong, please try again.";
+                }
+                else
+                {
+                    mr.IsSuccess = false;
+                    mr.Message = "Invalid Student history!";
+                }
             }
             return mr;
         }
